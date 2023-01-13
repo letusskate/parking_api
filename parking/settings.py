@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
+    'apps.cars',
+    'apps.users'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'parking.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+# log
 LOG_PATH = os.path.join(BASE_DIR, 'logs')
 if not os.path.exists(LOG_PATH):
     os.mkdir(LOG_PATH)
@@ -209,6 +211,7 @@ REST_FRAMEWORK = {    #把JWTtoken校验注册
     ),
 }
 
+# redis
 CACHES = {
     "default":{
         "BACKEND":"django_redis.cache.RedisCache",
