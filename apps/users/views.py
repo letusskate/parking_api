@@ -18,7 +18,7 @@ def get_userinfo(request):
     result = render(request, 'userinfo.html', context={
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "email": user.email,
+        "username": user.username,
     })
     return result
 
@@ -28,7 +28,7 @@ class RegisterView(APIView):
         import json
         user_data = json.loads(request.body)
         serializer=CreateUserSerializer(data={
-            "email":user_data.get("email"),
+            "username":user_data.get("username"),
             "password": user_data.get("password"),
             "first_name":user_data.get("first_name"),
             "last_name":user_data.get("last_name"),
@@ -40,7 +40,7 @@ class RegisterView(APIView):
         user = Users.objects.create(
             first_name=user_data['first_name'],
             last_name=user_data['last_name'],
-            email=user_data['email'],
+            username=user_data['username'],
             gender=user_data['gender'],
             password=user_data['password']
         )
@@ -57,9 +57,9 @@ class UserLoginView(APIView):
     authentication_classes = ()#不再token校验
     def post(self,request):
         data = json.loads(request.body)
-        email = data.get('email')
+        username = data.get('username')
         pswd = data.get('password')
-        user = Users.objects.filter(email=email).first()
+        user = Users.objects.filter(username=username).first()
         if not user:
             return JsonResponse({
                 'code': 404,
@@ -73,7 +73,7 @@ class UserLoginView(APIView):
                 'message': "User password not correct"
             })
         payload = {
-            "email": email,
+            "username": username,
             # "exp":int(time.time())+30*60,
             "exp": int(time.time()) + 300000 * 60,
         }
@@ -94,10 +94,10 @@ class ChangePasswordView(APIView):
     # authentication_classes = ()
     def post(self, request):
         data = json.loads(request.body)
-        email = data.get('email')
+        username = data.get('username')
         pswd = data.get('password')
         npswd = data.get('new-password')
-        _user = Users.objects.filter(email=email)
+        _user = Users.objects.filter(username=username)
         user=_user.first()
         if not user:
             return JsonResponse({
@@ -122,3 +122,39 @@ class ChangePasswordView(APIView):
             'new-password': npswd
         })
 
+class GetMoneyView(APIView):
+    def get(self,request):
+        data = json.loads(request.body)
+        usr = Users.objects.filter(username=data["username"]).first()
+        if not usr:
+            return JsonResponse({
+                'code':404,
+                'message': 'user not exist',
+            })
+        money = usr.money
+        return JsonResponse({
+            'code':200,
+            'message': 'success',
+            'money': money
+        })
+class AddMoneyView(APIView):
+    def post(self,request):
+        data = json.loads(request.body)
+        money = data['money']
+        username = data['username']
+        totalmoney = Users.objects.filter(username=username).first().money+money
+        usr = Users.objects.filter(username=username).first()
+        if not usr:
+            return JsonResponse({
+                'code':404,
+                'message': 'user not exist',
+            })
+        Users.objects.filter(username=username).update(money=totalmoney)
+        return JsonResponse({
+            'code':200,
+            'message':'success',
+            'data':{
+                'addmoney':money,
+                'totalmoney':totalmoney
+            }
+        })

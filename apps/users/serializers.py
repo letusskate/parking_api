@@ -5,7 +5,7 @@ from apps.users.models import UserGender, Users
 
 
 class CreateUserSerializer(serializers.Serializer):
-    email = serializers.EmailField(
+    username = serializers.EmailField(
         max_length=200,allow_blank=False
     )
     password=serializers.CharField(
@@ -26,9 +26,9 @@ class CreateUserSerializer(serializers.Serializer):
     )
 
     def validate(self,attrs):
-        email = attrs.get('email')
-        if Users.objects.filter(email = email).exists():
-            raise serializers.ValidationError("User email exists")
+        username = attrs.get('username')
+        if Users.objects.filter(username = username).exists():
+            raise serializers.ValidationError("User username exists")
         return attrs
 
 
