@@ -9,9 +9,8 @@ class ParkingLot(BaseModel):
     description = models.CharField(max_length=400, null=False)
     hourPrice = models.FloatField()
     monthPrice = models.FloatField()
-    d = models.IntegerField(null=False)
-    m = models.IntegerField(null=False)
-    s = models.IntegerField(null=False)
+    latitude = models.FloatField(default=0,null=False)
+    longitude = models.FloatField(default=0,null=False)
     def __str__(self):
         return self.name
     class Meta:
@@ -19,3 +18,13 @@ class ParkingLot(BaseModel):
         verbose_name = 'ParkingLot'
         verbose_name_plural = 'ParkingLot'
 
+class ParkingPlace(BaseModel):
+    identifier = models.CharField(max_length=200,null=False)
+    parkingLot = models.ForeignKey(ParkingLot, related_name='parkingLot_parkingPlace', on_delete=models.CASCADE)
+    spare = models.BooleanField(default=True)
+    def __str__(self):
+        return self.identifier
+    class Meta:
+        db_table = 'ParkingPlace'
+        verbose_name = 'ParkingPlace'
+        verbose_name_plural = 'ParkingPlace'

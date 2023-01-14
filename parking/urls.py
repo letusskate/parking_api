@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
+from apps.orders.views import ReservationView, DeleteReservationView, GetOrderView, GetUserOrdersView
 from apps.users.views import get_userinfo, RegisterView, ChangePasswordView, UserLoginView, GetMoneyView, AddMoneyView
 
 urlpatterns = [
@@ -27,4 +28,10 @@ urlpatterns = [
     path('api/users/change-password', csrf_exempt(ChangePasswordView.as_view())),
     path('api/users/get-money', csrf_exempt(GetMoneyView.as_view())),
     path('api/users/add-money', csrf_exempt(AddMoneyView.as_view())),
+    # path('api/parkinglot/get-parkinglot', csrf_exempt())
+    # path('api/parkinglot/
+    path('api/orders/reservation',csrf_exempt(ReservationView.as_view())),
+    path('api/orders/delete-reservation',csrf_exempt(DeleteReservationView.as_view())),
+    path('api/orders/get-order',csrf_exempt(GetOrderView.as_view())),
+    path('api/orders/get-user-orders',csrf_exempt(GetUserOrdersView.as_view())),
 ]

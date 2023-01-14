@@ -45,7 +45,7 @@ class RegisterView(APIView):
             password=user_data['password']
         )
 
-        cache.delete('user_data')#旁路模式，删除缓存
+        # cache.delete('user_data')#旁路模式，删除缓存
 
         # 创建用户
         return JsonResponse({'code': 200, 'message': 'success', "data": {

@@ -15,7 +15,7 @@ class CreateUserSerializer(serializers.Serializer):
         max_length=200,
         error_messages={
             "blank":"first name is required",
-            "max-length":"xxx"
+            "max-length":"the name is too long"
         }
     )
     last_name = serializers.CharField(
