@@ -22,6 +22,7 @@ class ParkingPlace(BaseModel):
     identifier = models.CharField(max_length=200,null=False)
     parkingLot = models.ForeignKey(ParkingLot, related_name='parkingLot_parkingPlace', on_delete=models.CASCADE)
     spare = models.BooleanField(default=True)
+    password = models.CharField(max_length=200,null=False,default='123456')
     def __str__(self):
         return self.identifier
     class Meta:
