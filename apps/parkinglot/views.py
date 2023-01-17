@@ -51,4 +51,16 @@ class AreaParkingLotView(APIView):
             }
         })
 
+class AddParkingLotView(APIView):
+    def post(self,request):
+        data = json.loads(request.body)
+        place_num = data.get('place_num')
+
+        return Response({
+            'code':200,
+            'message':'success',
+            'data':{
+                'parkinglot_place_num':place_num
+            }
+        })
 
