@@ -1,0 +1,11 @@
+!*.txt
+!*.py
+/*.log
+/*.cfg
+/.xml
+/venv/
+/.idea/
+!.gitignore
+!README.md
+!requirements.txt
+!db.sqlite3
