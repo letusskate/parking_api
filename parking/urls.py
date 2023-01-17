@@ -19,7 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from apps.orders.views import ReservationView, DeleteReservationView, GetOrderView, GetUserOrdersView, \
     CheckParkingPasswordView, EndOrderView
-from apps.parkinglot.views import AreaParkingLotView, GetParkingLotView
+from apps.parkinglot.views import AreaParkingLotView, GetParkingLotView, AddParkingLotView
 from apps.users.views import get_userinfo, RegisterView, ChangePasswordView, UserLoginView, GetMoneyView, AddMoneyView
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/users/add-money', csrf_exempt(AddMoneyView.as_view())),
     path('api/parkinglot/get-parkinglot', csrf_exempt(GetParkingLotView.as_view())),
     path('api/parkinglot/area-parkinglot',csrf_exempt(AreaParkingLotView.as_view())),
+    path('api/parkinglot/add-parkinglot',csrf_exempt(AddParkingLotView.as_view())),
     path('api/orders/reservation',csrf_exempt(ReservationView.as_view())),
     path('api/orders/delete-reservation',csrf_exempt(DeleteReservationView.as_view())),
     path('api/orders/get-order',csrf_exempt(GetOrderView.as_view())),
