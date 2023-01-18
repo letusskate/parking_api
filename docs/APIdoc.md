@@ -364,6 +364,49 @@ URL: http://127.0.0.1:8000/api/parkinglot/area-parkinglot
                 }
             }
 
+## 新增停车场   [/api/parkinglot/add-parkinglot]
+输入停车场名称，随机创建出停车场和车位
+
+### 查看坐标区域内的所有停车场 [POST]
+
+```
+URI: /api/parkinglot/add-parkinglot
+URL: http://127.0.0.1:8000/api/parkinglot/add-parkinglot
+```
+
++ 参数说明
+    + parkinglot_id: 停车场的id
+    + parkinglot_spare_place_num: 停车场剩余车位数量
+    + parkinglot_place_num: 停车场车位总数
+    + parkinglot_hour_price: 停车场每小时价格
+    + parkinglot_month_price: 停车场每月价格
+
++ 请求 (application/json)
+    
+    + Headers
+				
+            AuthToken: 12345abc
+    
+    + Body
+
+            {
+                "name":"my test parkinglot"
+            }
++ 响应 200 (application/json)
+
+    + Body
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "parkinglot_id": 3,
+                    "parkinglot_spare_place_num": 11,
+                    "parkinglot_place_num": 26,
+                    "parkinglot_hour_price": 5,
+                    "parkinglot_month_price": 415
+                }
+            }
 
 # 订单
 
