@@ -365,7 +365,7 @@ URL: http://127.0.0.1:8000/api/parkinglot/area-parkinglot
             }
 
 ## 新增停车场   [/api/parkinglot/add-parkinglot]
-输入停车场名称，随机创建出停车场和车位
+输入停车场名称，随机创建出停车场和车位，返回空闲车位数量、车位总数、停车场价格。
 
 ### 查看坐标区域内的所有停车场 [POST]
 
