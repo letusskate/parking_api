@@ -68,7 +68,7 @@ class DeleteReservationView(APIView):
         })
 
 class GetOrderView(APIView):
-    def get(self,request):
+    def post(self,request):
         data = json.loads(request.body)
         order_id = data['order_id']
         order = Orders.objects.filter(id=order_id)
@@ -84,7 +84,7 @@ class GetOrderView(APIView):
             'data':order_data[0]
         })
 class GetUserOrdersView(APIView):
-    def get(self,request):
+    def post(self,request):
         data = json.loads(request.body)
         username = data['username']
         user = Users.objects.filter(username=username).first()

@@ -123,7 +123,7 @@ class ChangePasswordView(APIView):
         })
 
 class GetMoneyView(APIView):
-    def get(self,request):
+    def post(self,request):
         data = json.loads(request.body)
         usr = Users.objects.filter(username=data["username"]).first()
         if not usr:

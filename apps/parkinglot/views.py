@@ -12,7 +12,7 @@ from apps.parkinglot.serializers import LotModelSerializer, PlaceModelSerializer
 # Create your views here.
 
 class GetParkingLotView(APIView):
-    def get(self,request):
+    def post(self,request):
         data = json.loads(request.body)
         lot_id = data.get('parkinglot_id')
         parkinglot = ParkingLot.objects.filter(id=lot_id)
@@ -35,7 +35,7 @@ class GetParkingLotView(APIView):
 
 
 class AreaParkingLotView(APIView):
-    def get(self,request):
+    def post(self,request):
         data = json.loads(request.body)
         left_top_latitude = data.get('left-top-latitude')
         left_top_longitude = data.get('left-top-longitude')
